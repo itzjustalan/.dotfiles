@@ -135,7 +135,7 @@ alias gr="git remote"
 alias grv="git remote -v"
 alias gpush="git push origin main"
 alias gpull="git pull origin main"
-alias gss="git add -A;git commit -m \"automated commit\";git push origin main;git pull origin main;git status"
+alias gss="git add -A;git commit -m \"automated commit\";git pull origin main;git push origin main;git status"
 alias gsn="git add -A;git commit;"
 
 # WSl drives
