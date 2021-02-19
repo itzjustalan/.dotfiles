@@ -1,0 +1,8 @@
+alias ll="ls -a"
+
+
+
+
+
+PS1="\w \$ "
+alias bashrctest="echo termux"
