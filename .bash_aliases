@@ -50,6 +50,8 @@ export EDITOR=vim
 #aliases
 alias alias_name="actual_alias"
 
+alias h="tac ~/.bash_history | dmenu | tr -d '\n' | xclip -selection c"
+alias c=cat
 alias cp="cp -ir"                         # confirm before overwriting something
 alias cpy="cp -r"
 alias df='df -h'                          # human-readable sizes
@@ -129,9 +131,11 @@ alias cm="git commit -m "
 alias gl="git log --all --graph --decorate"
 alias gb="git branch"
 alias gc="git checkout"
+alias gr="git remote"
+alias grv="git remote -v"
 alias gpush="git push origin main"
 alias gpull="git pull origin main"
-alias gss="git add -A;git commit;git push origin main;git pull origin main;git status"
+alias gss="git add -A;git commit -m \"automated commit\";git push origin main;git pull origin main;git status"
 alias gsn="git add -A;git commit;"
 
 # WSl drives
