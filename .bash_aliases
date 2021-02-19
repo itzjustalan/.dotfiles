@@ -71,7 +71,7 @@ alias vavs="curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/m
 
 alias car="cd ~/static/vt100 ; ./slowcat.pl"
 alias cartoons="cartoon $(/bin/ls | grep .vt | shuf -n 1)"
-alias bashrc="vim ~/.bash_aliases"
+alias basha="vim ~/.bash_aliases"
 alias p="pacman"
 alias c.="code ."
 alias pi="sudo pacman -Si"
