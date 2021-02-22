@@ -53,6 +53,7 @@ set undofile
 set incsearch
 set splitbelow
 set splitright
+set pastetoggle=<F3>
 
 set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
@@ -61,19 +62,19 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 call plug#begin('~/.vim/plugged')
 " :PlugInstall
 
-Plug 'jremmen/vim-ripgrep'
-Plug 'tpope/vim-fugitive'
-Plug 'leafgarland/typescript-vim'
-Plug 'vim-utils/vim-man'
-Plug 'lyuts/vim-rtags'
-Plug 'git@github.com:kien/ctrlp.vim.git'
-Plug 'git@github.com:valloric/YouCompleteMe.git'
-Plug 'mbbill/undotree'
+"Plug 'jremmen/vim-ripgrep'
+"Plug 'tpope/vim-fugitive'
+"Plug 'leafgarland/typescript-vim'
+"Plug 'vim-utils/vim-man'
+"Plug 'lyuts/vim-rtags'
+"Plug 'git@github.com:kien/ctrlp.vim.git'
+"Plug 'git@github.com:valloric/YouCompleteMe.git'
+"Plug 'mbbill/undotree'
 Plug 'vimwiki/vimwiki'
-Plug 'dart-lang/dart-vim-plugin'
-Plug 'natebosch/vim-lsc'
-Plug 'natebosch/vim-lsc-dart'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'dart-lang/dart-vim-plugin'
+"Plug 'natebosch/vim-lsc'
+"Plug 'natebosch/vim-lsc-dart'
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 
 call plug#end()

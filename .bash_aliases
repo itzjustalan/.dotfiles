@@ -7,7 +7,7 @@
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
 # Not supported in the "fish" shell.
-(cat ~/.cache/wal/sequences &)
+#(cat ~/.cache/wal/sequences &)
 
 # Alternative (blocks terminal for 0-3ms)
 #cat ~/.cache/wal/sequences
@@ -21,15 +21,15 @@
 #    welcome.sh
 #    date +%F > ~/dateFile
 #else
-#    /home/alanj/myfiles/repos/shell-color-scripts/colorscript.sh random
+#    ~/myfiles/repos/shell-color-scripts/colorscript.sh random
 #fi
 
 
-# /home/alanj/myfiles/pgms/shell-color-scripts/colorscript.sh random
-#/home/alanj/myfiles/repos/shell-color-scripts/colorscript.sh random
-#/home/alanj/myfiles/repos/shell-color-scripts/colorscript.sh -e 36
+# ~/myfiles/pgms/shell-color-scripts/colorscript.sh random
+#~/myfiles/repos/shell-color-scripts/colorscript.sh random
+#~/myfiles/repos/shell-color-scripts/colorscript.sh -e 36
 
-#cmus /home/alanj/Music/rplay.m3u
+#cmus ~/Music/rplay.m3u
 
 #export PATH=$PATH:/path/to/dir1		  #or
 #export PATH=$PATH:/path/to/dir1:/path/to/dir2
@@ -50,6 +50,8 @@ export EDITOR=vim
 #aliases
 alias alias_name="actual_alias"
 
+alias bbash="source ~/.bashrc"
+
 alias h="tac ~/.bash_history | dmenu | tr -d '\n' | xclip -selection c"
 alias c=cat
 alias cp="cp -ir"                         # confirm before overwriting something
@@ -58,6 +60,7 @@ alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias more=less
 alias v="vim"
+alias z="zathura"
 alias rm="rm -Irf"
 alias ll='lsd -lah --group-dirs first --color=auto'
 alias cdd="cd .."
@@ -79,11 +82,12 @@ alias pS="sudo pacman -S"
 alias pyy="sudo pacman -Syyi"
 alias mci="make clean install"
 alias smci="sudo make clean install"
+alias wcl="wc -l"
 alias lff="lfcd"
 alias calender="calcurse"
 
 # pgms
-alias quick="cat /home/alanj/myfiles/quick"
+alias quick="cat ~/myfiles/quick"
 alias qq="cat ~/static/quick"
 alias bb="cat ~/static/bindings"           # bring bindings
 alias adg="cat ~/myfiles/agenda"
@@ -101,7 +105,7 @@ alias rescan="sudo /sys/class/net/wlo1/device/rescan"
 alias pmi="patch --merge -i"
 alias ws="wiki-search"
 alias vvk="vim ~/vimwiki/index.wiki"
-alias ttl="cat ~/vimwiki/personal/timeslots\ .wiki"
+alias ttl="cat ~/vimwiki/personal/timeslots\ .wiki;date"
 alias xc="xclip -selection clipboard"
 #alias ss="mkdir -p ~/myfiles/screenshots/$(date +%Y)/$(date +%B-%Y)/$(date +%F)/;scrot ~/myfiles/screenshots/$(date +%Y)/$(date +%B-%Y)/$(date +%F)/$(date +%Y-%m-%d-%T).png"
 #alias ssc="mkdir -p ~/myfiles/screenshots/$(date +%Y)/$(date +%B-%Y)/$(date +%F)/;st scrot -sf ~/myfiles/screenshots/$(date +%Y)/$(date +%B-%Y)/$(date +%F)/$(date +%Y-%m-%d-%T).png"
@@ -120,8 +124,8 @@ alias fbaspa="flutter build apk --split-per-abi"
 alias fbundle="flutter build appbundle"
 alias fpg="flutter clean;flutter pub get"
 
-#alias cc="cmus /home/alanj/Music/rplay.m3u"
-alias pp="cd /home/alanj/myfiles/pgms/shell-color-scripts/ && ./colorscript.sh -e 31"
+#alias cc="cmus ~/Music/rplay.m3u"
+alias pp="cd ~/myfiles/pgms/shell-color-scripts/ && ./colorscript.sh -e 31"
 
 # git commands
 alias gs="git status"
@@ -146,10 +150,10 @@ alias f:="cd /media/win/f"
 alias g:="cd /media/win/g"
 
 # work spaces
-alias wp="cd /home/alanj/wp/"
+alias wp="cd ~/wp/"
 alias wd="cd /mnt/c/Users/alanj/Desktop/"
-alias my="cd /home/alanj/myfiles/"
-alias myg="cd /home/alanj/myfiles/pgms/"
+alias my="cd ~/myfiles/"
+alias myg="cd ~/myfiles/pgms/"
 alias msc="cd ~/.local/bin/"
 alias gdt="cd ~/myfiles/repos/.dotfiles/"
 alias gdc="cd ~/work/almas/customer_app/"
@@ -159,6 +163,29 @@ alias gdi="cd ~/work/indic_law/"
 
 #alias logout="killall xinit"
 alias kl="ps -a | grep xinit"           # kill list
+
+# rm -rf safety
+mm() {
+  if [ "$1" = "-rf" ];then
+    if [ "$2" = "/" ];then
+      echo pottan
+    elif [ "$2" = "~" ];then
+      echo pottan
+    fi
+  fi
+}
+
+tm() {
+  if [ "$1" = "-rf" ];then
+    if [ "$2" = "/" ];then
+      echo pottan
+    elif [ "$2" = "~" ];then
+      echo pottan
+    elif [ "$2" = "~/" ];then
+      echo pottan
+    fi
+  fi
+}
 
 mkcdir(){
 		mkdir -p -- "$1" $$
@@ -175,6 +202,24 @@ mkcdir(){
 #colorscript random
 #cd
 
+
+timer () {
+  while :; do notify-send "its time";date;echo huh; sleep $(($_))s; done
+}
+
+
+timerr () {
+  while :
+  do
+    n
+    notify-send "timer for $1 mins";
+    sleep $((i))m
+    notify-send "its time"
+  done
+}
+
+
+
 _alarm() {
         ( \speaker-test --frequency $1 --test sine )&
         pid=$!
@@ -183,28 +228,31 @@ _alarm() {
 }
 
 # usable DEL KEY in st
-tput smkx   # use tput rmkx to quit application mode
-            # as this might have isssues with some
-            # new cli applications
+# use tput rmkx to quit application mode
+# as this might have isssues with some
+# new cli applications
+#tput smkx
 
 
 # lf icons
 if [ -f ~/.config/lf/icons ]; then
     . ~/.config/lf/icons
 fi
+
 # cd to last dir on lf exit
 lfcd () {
 tmp="$(mktemp)"
 lf -last-dir-path="$tmp" "$@"
-if [ -f "$tmp" ]; then
- dir="$(cat "$tmp")"
- rm -f "$tmp"
-  if [ -d "$dir" ]; then
-       if [ "$dir" != "$(pwd)" ]; then
-            cd "$dir"
-         fi
-      fi
-   fi
+cd $(cat $tmp)
+#if [ -f "$tmp" ]; then
+# dir="$(cat "$tmp")"
+# rm -f "$tmp"
+#  if [ -d "$dir" ]; then
+#       if [ "$dir" != "$(pwd)" ]; then
+#            cd "$dir"
+#         fi
+#      fi
+#   fi
 }
 
 
@@ -265,23 +313,23 @@ takeCustomScreenshot(){
 
 
 # export $PATH(s)
-#export PATH=$PATH:/home/alanj/development/flutter/bin/
-#export PATH=$PATH:/home/alanj/development/gradle/gradle-6.7.1/bin/
-#export ANDROID_SDK_ROOT=/home/alanj/development/android-sdk
+#export PATH=$PATH:~/development/flutter/bin/
+#export PATH=$PATH:~/development/gradle/gradle-6.7.1/bin/
+#export ANDROID_SDK_ROOT=~/development/android-sdk
 #export ANDROID_HOME=$ANDROID_SDK_ROOT
 #export PATH=$PATH:$ANDROID_HOME/cmdline-tools/tools
 
 # export $PATH(s)
-export PATH=$PATH:/home/alanj/development/flutter/bin/
-export PATH=$PATH:/home/alanj/development/gradle/gradle-6.7.1/bin/
-export ANDROID_SDK_ROOT=/home/alanj/development/gui-studio
+export PATH=$PATH:~/development/flutter/bin/
+export PATH=$PATH:~/development/gradle/gradle-6.7.1/bin/
+export ANDROID_SDK_ROOT=~/development/gui-studio
 export ANDROID_HOME=$ANDROID_SDK_ROOT
 export PATH=$PATH:$ANDROID_HOME
 
 
-export PATH=$PATH:/home/alanj/myfiles/pgms/android-studio/bin
+export PATH=$PATH:~/myfiles/pgms/android-studio/bin
 
-fortune
+#fortune
 #xrandr --outputHDMI-1-1 --auto --rotate right --left-of eDP-1
 
 #PS1="\u@\H \n"
