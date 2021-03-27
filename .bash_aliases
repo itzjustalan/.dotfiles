@@ -200,7 +200,7 @@ alias gdd="cd ~/work/almas/delivery_app/"
 alias gds="cd ~/work/almas/sales_app/"
 alias gdi="cd ~/work/indic_law/"
 
-alias gss="cd ~/pgms/side/"
+#alias gss="cd ~/pgms/side/"
 
 
 alias gdr="cd ~/pgms/springboot/rocket-science/"
