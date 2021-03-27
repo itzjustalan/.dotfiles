@@ -10,7 +10,7 @@
 "
 " system clipboard
 set clipboard+=unnamedplus
-set clipboard+=xclip
+"set clipboard+=xclip
 
 " fix file types
 autocmd BufRead,BufNewFile *.tex set filetype=tex

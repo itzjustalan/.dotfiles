@@ -38,14 +38,14 @@ export PATH=$PATH:~/.local/bin/
 export PATH=$PATH:~/.local/bin/sys/
 export PATH=$PATH:~/.local/bin/sys/buttons/
 export PATH=$PATH:~/.local/bin/perc/
-export PATH=$PATH:~/.local/bin/scripts/
+export PATH=$PATH:~/.local/bin/myscripts/
 export PATH=$PATH:
 export PATH=$PATH:
 export PATH=$PATH:
 export PATH=$PATH:
 
 
-export EDITOR=vim
+export EDITOR=nvim
 
 #aliases
 alias alias_name="actual_alias"
@@ -59,9 +59,9 @@ alias cpy="cp -r"
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias more=less
-alias v="vim"
+alias v=nvim
 alias z="zathura"
-alias rm="rm -Irf"
+#alias rm="rm -Irf"
 alias ll='lsd -lah --group-dirs first --color=auto'
 alias cdd="cd .."
 alias cdc="cd -"
@@ -74,7 +74,7 @@ alias vavs="curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/m
 
 alias car="cd ~/static/vt100 ; ./slowcat.pl"
 alias cartoons="cartoon $(/bin/ls | grep .vt | shuf -n 1)"
-alias basha="vim ~/.bash_aliases"
+alias basha="$EDITOR ~/.bash_aliases"
 alias p="pacman"
 alias c.="code ."
 alias pi="sudo pacman -Si"
@@ -91,31 +91,70 @@ alias quick="cat ~/myfiles/quick"
 alias qq="cat ~/static/quick"
 alias bb="cat ~/static/bindings"           # bring bindings
 alias adg="cat ~/myfiles/agenda"
-alias eadg="vim ~/myfiles/agenda"
-alias eqq="vim ~/static/quick"
+alias eadg="$EDITOR ~/myfiles/agenda"
+alias eqq="$EDITOR ~/static/quick"
 alias scrc="scrcpy -S"
 alias shtn="shutdown now"
 alias start-rdp="sudo /etc/init.d/xrdp start"
 alias stop-rdp="sudo /etc/init.d/xrdp stop"
 alias setx="xrandr --output HDMI-1-1 --auto --rotate right --left-of eDP-1"
 alias gqr="qrencode -o ~/outputqrcode.png"
+alias vqr="sxiv ~/outputqrcode.png;rqr"
 alias rqr="qrencode -o ~/outputqrcode.png \" \";clear"
-alias vqr="clear;sxiv ~/outputqrcode.png;rqr"
 alias rescan="sudo /sys/class/net/wlo1/device/rescan"
 alias pmi="patch --merge -i"
 alias ws="wiki-search"
-alias vvk="vim ~/vimwiki/index.wiki"
+alias vvk="$EDITOR ~/vimwiki/index.wiki"
 alias ttl="cat ~/vimwiki/personal/timeslots\ .wiki;date"
 alias xc="xclip -selection clipboard"
-#alias ss="mkdir -p ~/myfiles/screenshots/$(date +%Y)/$(date +%B-%Y)/$(date +%F)/;scrot ~/myfiles/screenshots/$(date +%Y)/$(date +%B-%Y)/$(date +%F)/$(date +%Y-%m-%d-%T).png"
-#alias ssc="mkdir -p ~/myfiles/screenshots/$(date +%Y)/$(date +%B-%Y)/$(date +%F)/;st scrot -sf ~/myfiles/screenshots/$(date +%Y)/$(date +%B-%Y)/$(date +%F)/$(date +%Y-%m-%d-%T).png"
-alias ss=takeScreenshot
-alias ssc=takeCustomScreenshot
+alias ss="mkdir -p ~/myfiles/screenshots/$(date +%Y)/$(date +%B-%Y)/$(date +%F)/;maim ~/myfiles/screenshots/$(date +%Y)/$(date +%B-%Y)/$(date +%F)/hp15-screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
+alias ssc="mkdir -p ~/myfiles/screenshots/$(date +%Y)/$(date +%B-%Y)/$(date +%F)/;maim -s ~/myfiles/screenshots/$(date +%Y)/$(date +%B-%Y)/$(date +%F)/hp15-screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
+#alias ss=takeScreenshot
+#alias ssc=takeCustomScreenshot
+
 imgpath="/media/win/f/linux/root/myfiles/repos/wallpapers"
 alias chwal="img=$(ls $imgpath | shuf -n 1);wal -i $imgpath/$img"
 alias chwaln="img=$(ls $imgpath | shuf -n 1);wal -ni $imgpath/$img"
-alias eemb="vim ~/blog/itzjustalan.wiki"
+alias eemb="$EDITOR ~/blog/itzjustalan.wiki"
 alias ddmb="deployMyBlog"
+alias ydl="youtube-dl"
+alias ydlF="youtube-dl -F"
+alias ydlf="youtube-dl --external-downloader /usr/bin/axel -f"
+alias ydld="youtube-dl --external-downloader /usr/bin/axel -f best"
+alias ydla="youtube-dl --external-downloader /usr/bin/axel -f 'bestaudio[ext=m4a]'"
+alias xsc="tr -d '\n' | xclip -selection clipboard"
+alias avd="~/development/android-sdk/emulator/emulator -avd Pixel_4_API_30"
+
+alias lofi="mpv https://www.youtube.com/watch?v=5qap5aO4i9A --no-video --force-seekable=yes"
+
+alias manpup="$EDITOR ~/myfiles/repos/pup/README.md"
+
+# fzf stuff
+
+fcd() {
+  cd "$(find -L -type d ! -path './cargo/*','./cache/','./config/' | fzf -e)"
+}
+
+op() {
+  xdg-open "$(find -type f ! -path './cargo/*','./cache/','./config/' | fzf)"
+}
+
+alias gp="find -type f ! -path './cargo/*','./cache/','./config/' | fzf | sed 's/^..//' | tr -d '\n' | xclip -selection c"
+
+sxq(){
+  sx $@ | gqr;vqr
+}
+
+csx() {
+  curl "http://0x0.st/$1.txt";
+}
+
+csxx() {
+  curl "http://0x0.st/$1";
+}
+
+
+
 
 # /pgms
 
@@ -154,12 +193,17 @@ alias wp="cd ~/wp/"
 alias wd="cd /mnt/c/Users/alanj/Desktop/"
 alias my="cd ~/myfiles/"
 alias myg="cd ~/myfiles/pgms/"
-alias msc="cd ~/.local/bin/"
+alias msc="cd ~/.local/bin/myscripts/"
 alias gdt="cd ~/myfiles/repos/.dotfiles/"
 alias gdc="cd ~/work/almas/customer_app/"
 alias gdd="cd ~/work/almas/delivery_app/"
 alias gds="cd ~/work/almas/sales_app/"
 alias gdi="cd ~/work/indic_law/"
+
+alias gss="cd ~/pgms/side/"
+
+
+alias gdr="cd ~/pgms/springboot/rocket-science/"
 
 #alias logout="killall xinit"
 alias kl="ps -a | grep xinit"           # kill list
@@ -325,9 +369,21 @@ export PATH=$PATH:~/development/gradle/gradle-6.7.1/bin/
 export ANDROID_SDK_ROOT=~/development/gui-studio
 export ANDROID_HOME=$ANDROID_SDK_ROOT
 export PATH=$PATH:$ANDROID_HOME
+export CHROME_EXECUTABLE="/usr/bin/google-chrome-stable"
+
+export PATH="$PATH":"~/development/flutter/.pub-cache/bin"
 
 
 export PATH=$PATH:~/myfiles/pgms/android-studio/bin
+
+
+
+
+
+# springboot
+export PATH=$PATH:~/development/springboot/bin/
+
+
 
 #fortune
 #xrandr --outputHDMI-1-1 --auto --rotate right --left-of eDP-1
