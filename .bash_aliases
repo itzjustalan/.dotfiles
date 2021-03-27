@@ -45,7 +45,6 @@ export PATH=$PATH:
 export PATH=$PATH:
 
 
-export EDITOR=nvim
 
 #aliases
 alias alias_name="actual_alias"

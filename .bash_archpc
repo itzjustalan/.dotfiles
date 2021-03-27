@@ -14,4 +14,8 @@ tput smkx   # use tput rmkx to quit application mode
 
 fortune
 
+
+
+export EDITOR=nvim
+
 alias bashrc="vim ~/.bash_archpc"
