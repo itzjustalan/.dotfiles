@@ -1,4 +1,5 @@
-#neofetch	#takes time to load try peafetch or shell-color-scripts instead #neofetch --ascii "$(fortune | cowsay -f blowfish -W 30)"
+#neofetch	#takes time to load try peafetch or shell-color-scripts instead #neofetch --ascii "$(fortune | cowsay -f bspa
+#lowfish -W 30)"
 #neofetch --ascii "$(fortune | cowsay -f $(/usr/bin/ls /usr/share/cows/ | shuf -n 1) -W 30 )"
 
 #wal -q -n -i ~/downloads/almas_banner.png
@@ -34,11 +35,15 @@
 #export PATH=$PATH:/path/to/dir1		  #or
 #export PATH=$PATH:/path/to/dir1:/path/to/dir2
 
+
 export PATH=$PATH:~/.local/bin/
 export PATH=$PATH:~/.local/bin/sys/
 export PATH=$PATH:~/.local/bin/sys/buttons/
 export PATH=$PATH:~/.local/bin/perc/
 export PATH=$PATH:~/.local/bin/myscripts/
+export PATH=$PATH:
+export PATH=$PATH:
+export PATH=$PATH:~/.cargo/bin
 export PATH=$PATH:
 export PATH=$PATH:
 export PATH=$PATH:
@@ -59,16 +64,18 @@ alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias more=less
 alias v=nvim
+alias m=mpv
 alias z="zathura"
-#alias rm="rm -Irf"
+#alias rm="rm -rfi"
 alias ll='lsd -lah --group-dirs first --color=auto'
 alias cdd="cd .."
 alias cdc="cd -"
 alias diff="diff --color=auto"
 alias mkdir="mkdir -p"
+alias curdir="pwd | rev | cut -d '/' -f 1 | rev"
 alias sortsize="/bin/ls -lSah --color=auto"
 #alias cowsayy="cowsay -f $(ls ~/myfiles/mycows | shuf -n 1)"
-alias clear="[ $[$RANDOM % 8] = 0 ] && timeout 2 cmatrix || clear"
+#alias clear="[ $[$RANDOM % 8] = 0 ] && timeout 2 cmatrix || clear"
 alias vavs="curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash"
 
 alias car="cd ~/static/vt100 ; ./slowcat.pl"
@@ -78,7 +85,7 @@ alias p="pacman"
 alias c.="code ."
 alias pi="sudo pacman -Si"
 alias pS="sudo pacman -S"
-alias pyy="sudo pacman -Syyi"
+alias pyy="sudo pacman -Syy"
 alias mci="make clean install"
 alias smci="sudo make clean install"
 alias wcl="wc -l"
@@ -92,8 +99,8 @@ alias bb="cat ~/static/bindings"           # bring bindings
 alias adg="cat ~/myfiles/agenda"
 alias eadg="$EDITOR ~/myfiles/agenda"
 alias eqq="$EDITOR ~/static/quick"
-alias scrc="scrcpy -S"
-alias shtn="shutdown now"
+#alias scrc="scrcpy -S"
+alias shtn="uptime -p;sleep 1s;shutdown now"
 alias start-rdp="sudo /etc/init.d/xrdp start"
 alias stop-rdp="sudo /etc/init.d/xrdp stop"
 alias setx="xrandr --output HDMI-1-1 --auto --rotate right --left-of eDP-1"
@@ -110,6 +117,8 @@ alias ss="mkdir -p ~/myfiles/screenshots/$(date +%Y)/$(date +%B-%Y)/$(date +%F)/
 alias ssc="mkdir -p ~/myfiles/screenshots/$(date +%Y)/$(date +%B-%Y)/$(date +%F)/;maim -s ~/myfiles/screenshots/$(date +%Y)/$(date +%B-%Y)/$(date +%F)/hp15-screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
 #alias ss=takeScreenshot
 #alias ssc=takeCustomScreenshot
+alias sr="ffmpeg -f x11grab -i :0.0"
+alias sra="ffmpeg -f x11grab -i :0.0 -f alsa -ac 2 -i default"
 
 imgpath="/media/win/f/linux/root/myfiles/repos/wallpapers"
 alias chwal="img=$(ls $imgpath | shuf -n 1);wal -i $imgpath/$img"
@@ -120,6 +129,7 @@ alias ydl="youtube-dl"
 alias ydlF="youtube-dl -F"
 alias ydlf="youtube-dl --external-downloader /usr/bin/axel -f"
 alias ydld="youtube-dl --external-downloader /usr/bin/axel -f best"
+alias ydldd="youtube-dl --write-description --skip-download --youtube-skip-dash-manifest"
 alias ydla="youtube-dl --external-downloader /usr/bin/axel -f 'bestaudio[ext=m4a]'"
 alias xsc="tr -d '\n' | xclip -selection clipboard"
 alias avd="~/development/android-sdk/emulator/emulator -avd Pixel_4_API_30"
@@ -153,12 +163,31 @@ csxx() {
 }
 
 
+# get ip addr
+alias getip="ip addr | grep 'scope global dynamic noprefixroute' | cut -d ' ' -f6 | gqr;vqr"
+
+
+cliplink="http://localhost:4321"
+#cliplink="https://28ddd4611d0a.ngrok.io"
+alias clip="curl $cliplink"
+alias clog="curl $cliplink/log"
+sclip(){
+  sclip='{"url": "'$@'"}'
+  curl -H "Content-Type: application/json" -d "$sclip" $cliplink
+}
+
+
+
+
 
 
 # /pgms
 
 # flutter
-alias fbaspa="flutter build apk --split-per-abi"
+alias f="flutter"
+alias flutter="fvm flutter"
+alias fbaspa='name=$(pwd | rev | cut -d '/' -f 1 | rev);echo grr \"${name}\";flutter build apk --split-per-abi;mv ./build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk ./build/app/outputs/flutter-apk/${name}.apk;echo ${name}.apk built;'
+#alias fbaspa="name=${PWD##*/};echo grr ${name};flutter build apk --split-per-abi;mv ./build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk ./build/app/outputs/flutter-apk/${name}.apk;echo ${name}.apk built;"
 alias fbundle="flutter build appbundle"
 alias fpg="flutter clean;flutter pub get"
 
@@ -173,12 +202,16 @@ alias cm="git commit -m "
 alias gl="git log --all --graph --decorate"
 alias gb="git branch"
 alias gc="git checkout"
+alias gd="git diff"
 alias gr="git remote"
 alias grv="git remote -v"
 alias gpush="git push origin main"
 alias gpull="git pull origin main"
 alias gss="git add -A;git commit -m \"automated commit\";git pull origin main;git push origin main;git status"
 alias gsn="git add -A;git commit;"
+
+# docker commands
+alias docker="sudo docker"
 
 # WSl drives
 alias c:="cd /media/win/c"
@@ -198,6 +231,33 @@ alias gdc="cd ~/work/almas/customer_app/"
 alias gdd="cd ~/work/almas/delivery_app/"
 alias gds="cd ~/work/almas/sales_app/"
 alias gdi="cd ~/work/indic_law/"
+alias gdb="cd ~/work/milibus/"
+
+gdp(){
+  initialDir=$(pwd);
+  gdd;
+  pwd;
+  git add -A;
+  git commit -m "automated commit";
+  git push origin main;
+  if [ "$1" == "-b" ]; then fbaspa fi;
+
+  gds;
+  pwd;
+  git add -A;
+  git commit -m "automated commit";
+  git push origin main;
+  if [ "$1" == "-b" ]; then fbaspa fi;
+
+  gdc;
+  pwd;
+  git add -A;
+  git commit -m "automated commit";
+  git push origin main;
+  if [ "$1" == "-b" ]; then fbaspa fi;
+
+  cd $initialDir;
+}
 
 #alias gss="cd ~/pgms/side/"
 
@@ -208,30 +268,32 @@ alias gdr="cd ~/pgms/springboot/rocket-science/"
 alias kl="ps -a | grep xinit"           # kill list
 
 # rm -rf safety
-mm() {
-  if [ "$1" = "-rf" ];then
-    if [ "$2" = "/" ];then
-      echo pottan
-    elif [ "$2" = "~" ];then
-      echo pottan
-    fi
-  fi
-}
 
 tm() {
+  echo "all -> $@"
   if [ "$1" = "-rf" ];then
     if [ "$2" = "/" ];then
       echo pottan
     elif [ "$2" = "~" ];then
       echo pottan
+    elif [ "$2" = "j" ];then
+      echo pottan rm safety j is locked consult the alias
     elif [ "$2" = "~/" ];then
       echo pottan
+    elif [ "$2" = "/home/alanj" ];then
+      echo pottan
+    elif [ "$2" = "/home/alanj/" ];then
+      echo pottan
+    else
+      rm $@
     fi
+  else
+    rm $@
   fi
 }
 
 mkcdir(){
-		mkdir -p -- "$1" $$
+		mkdir -p -- "$1" &&
 		cd -P -- "$1"
 }
 
@@ -246,18 +308,18 @@ mkcdir(){
 #cd
 
 
+#  timer () {
+#    while :; do notify-send "its time";date;echo huh; sleep $(($_))s; done
+#  }
+
+
 timer () {
-  while :; do notify-send "its time";date;echo huh; sleep $(($_))s; done
-}
-
-
-timerr () {
   while :
   do
-    n
-    notify-send "timer for $1 mins";
-    sleep $((i))m
-    notify-send "its time"
+    date
+    notify-send "timer for $1";
+    sleep $1
+    #sleep $((1))m
   done
 }
 
@@ -383,6 +445,21 @@ export PATH=$PATH:~/myfiles/pgms/android-studio/bin
 export PATH=$PATH:~/development/springboot/bin/
 
 
+
+# other work specific envs
+[[ -f ~/.bashenvs ]] && . ~/.bashenvs
+
+
+
+
+
+# Other XDG paths
+export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:="$HOME/.cache"}
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:="$HOME/.config"}
+
+# Didable less histry file
+export LESSHISTORYFILE=-
 
 #fortune
 #xrandr --outputHDMI-1-1 --auto --rotate right --left-of eDP-1
