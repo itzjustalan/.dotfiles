@@ -208,7 +208,8 @@ alias grv="git remote -v"
 alias gpush="git push origin main"
 alias gpull="git pull origin main"
 alias gss="git add -A;git commit -m \"automated commit\";git pull origin main;git push origin main;git status"
-alias gsn="git add -A;git commit;"
+alias gsn="git add -A;git commit -m \"automated commit\";"
+alias gsm="git add -A;git commit -m "
 
 # docker commands
 alias docker="sudo docker"
